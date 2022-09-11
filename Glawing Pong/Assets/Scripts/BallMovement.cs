@@ -9,6 +9,7 @@ public class BallMovement : MonoBehaviour
     public float maxExtraSpeed;
     private int hitCounter;
     private Rigidbody2D rb;
+    public bool player1Start = true;
 
 
     
@@ -19,11 +20,26 @@ public class BallMovement : MonoBehaviour
     }
 
 
+    private void RestartBall()
+    {
+        rb.velocity = new Vector2(0, 0);
+        transform.position = new Vector2(0, 0);
+    }
+
+
     public IEnumerator Launch()
     {
+        RestartBall();
         hitCounter = 0;
         yield return new WaitForSeconds(1);
-        MoveBall(new Vector2(-1, 0));
+        if(player1Start == true)
+        {
+            MoveBall(new Vector2(-1, 0));
+        }
+        else
+        {
+            MoveBall(new Vector2(1, 0));
+        }
     }
 
 
